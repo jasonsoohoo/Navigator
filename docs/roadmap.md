@@ -1,12 +1,17 @@
 # Navigator roadmap
 
-1. **Foundation** - Establish repository governance and the backend foundation.
-2. **Domain kernel** - Define the core control-plane domain.
-3. **Persistence and API** - Add durable storage and API operations.
-4. **Mock vertical slice** - Exercise an end-to-end flow with mock integrations.
-5. **Safety and reconciliation** - Add operational safeguards and reconciliation.
-6. **Cloud foundation** - Establish the required cloud infrastructure.
-7. **OCI registry integration** - Integrate public and private OCI registries.
-8. **Runpod integration** - Add the Runpod provider integration.
-9. **Workload protocol** - Define and implement workload communication contracts.
-10. **Production operations** - Add production deployment and operational capabilities.
+- **Stage 0A: Backend foundation (complete)** - Repository governance and the ASP.NET Core foundation.
+- **Stage 0B: Frontend foundation (current)** - React browser shell, routing, and API health status.
+- **Stage 0C: Container and Compose foundation (next)** - Local container and Compose packaging.
+
+## Later stages
+
+1. **Domain kernel** - Define the core control-plane domain.
+2. **Persistence and API** - Add durable storage and API operations.
+3. **Mock vertical slice** - Exercise an end-to-end flow with mock integrations.
+4. **Safety and reconciliation** - Add operational safeguards and reconciliation.
+5. **Cloud foundation** - Establish the required cloud infrastructure.
+6. **OCI registry integration** - Integrate public and private OCI registries.
+7. **Runpod integration** - Add the Runpod provider integration.
+8. **Workload protocol** - Define and implement workload communication contracts.
+9. **Production operations** - Add production deployment and operational capabilities.

@@ -3,21 +3,21 @@ Set-StrictMode -Version Latest
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 
-Push-Location $repositoryRoot
+Push-Location (Join-Path $repositoryRoot 'web/Navigator.Web')
 try {
-    dotnet restore Navigator.sln
+    npm ci
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    dotnet format Navigator.sln --verify-no-changes --no-restore
+    npm run lint
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    dotnet build Navigator.sln --configuration Release --no-restore
+    npm run typecheck
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    dotnet test Navigator.sln --configuration Release --no-build
+    npm run test -- --run
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    & (Join-Path $PSScriptRoot 'verify-web.ps1')
+    npm run build
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 finally {
