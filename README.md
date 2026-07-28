@@ -89,6 +89,6 @@ cd web/Navigator.Web
 npm run dev
 ```
 
-The browser uses relative API URLs. Vite proxies `/health` and `/api` to `http://localhost:5080` by default; set the server-side `NAVIGATOR_API_PROXY_TARGET` value to override the local target.
+The browser uses relative API URLs. For local development, Vite proxies `/health` and `/api` to `http://localhost:5080` by default; set `NAVIGATOR_API_PROXY_TARGET` in the Vite development server environment to override that target.
 
 See the [staged roadmap](docs/roadmap.md) for planned platform work.
