@@ -13,6 +13,12 @@ Navigator is a control plane. It coordinates the future lifecycle of disposable 
 
 Dependencies point inward: API to Infrastructure and Application, Infrastructure to Application and Domain, and Application to Domain. Circular references are prohibited. External provider and registry SDK types must be translated at the Infrastructure boundary; provider-specific types may not leak into Domain or Application models.
 
+## Browser client
+
+`Navigator.Web` is a React and TypeScript browser client of `Navigator.Api`. Browser HTTP access is isolated under `src/api` and uses same-origin relative URLs. Browser code never calls GPU providers or container registries directly, and authentication, when introduced, will be enforced through the control-plane API boundary.
+
+Frontend types are view and API models, not Navigator domain entities. Provider and registry credentials never enter browser application state. Vite proxying supports local development only; production packaging of the frontend is deferred to Stage 0C.
+
 ## Future repository areas
 
-Future stages may add `Web` for the React client, `contracts` for workload-facing contracts, `infra` for cloud infrastructure definitions, and `deploy` for deployment assets. These directories are not part of the Stage 0A implementation.
+Future stages may add `contracts` for workload-facing contracts, `infra` for cloud infrastructure definitions, and `deploy` for deployment assets.

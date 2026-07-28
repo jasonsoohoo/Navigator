@@ -6,7 +6,7 @@ Experiment, benchmark, model, training, inference, and other workload implementa
 
 ## Status
 
-Stage 0A establishes repository governance and the ASP.NET Core backend foundation. It includes an intentionally empty domain/application/infrastructure structure, a minimal API, and liveness and readiness integration tests. Later platform capabilities are not implemented yet.
+Stage 0A established repository governance and the ASP.NET Core backend foundation. Stage 0B adds the React browser-client foundation, navigation, and live API health status. Registry, deployment-profile, session, and settings pages are intentional placeholders for later stages.
 
 ## Repository layout
 
@@ -18,6 +18,8 @@ src/
   Navigator.Api/             ASP.NET Core host
 tests/
   Navigator.Api.IntegrationTests/
+web/
+  Navigator.Web/              React and TypeScript browser client
 docs/
   architecture/              Architecture documentation
   decisions/                 Architecture decision records
@@ -28,6 +30,7 @@ scripts/                     Local verification scripts
 ## Prerequisites
 
 - .NET 10 SDK
+- Node.js 22 LTS and npm
 - PowerShell or a POSIX-compatible shell for the verification scripts
 
 ## Build and run
@@ -59,5 +62,33 @@ curl http://localhost:5091/health/ready
 ```
 
 Both endpoints return HTTP 200 in Stage 0A.
+
+## Frontend
+
+Install and validate the browser client:
+
+```shell
+cd web/Navigator.Web
+npm ci
+npm run lint
+npm run typecheck
+npm run test -- --run
+npm run build
+```
+
+For local development, start the API from the repository root:
+
+```shell
+dotnet run --project src/Navigator.Api --urls http://localhost:5080
+```
+
+Then start Vite in a separate terminal:
+
+```shell
+cd web/Navigator.Web
+npm run dev
+```
+
+The browser uses relative API URLs. For local development, Vite proxies `/health` and `/api` to `http://localhost:5080` by default; set `NAVIGATOR_API_PROXY_TARGET` in the Vite development server environment to override that target.
 
 See the [staged roadmap](docs/roadmap.md) for planned platform work.
