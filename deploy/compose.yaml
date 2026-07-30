@@ -1,0 +1,20 @@
+services:
+  navigator:
+    image: ${NAVIGATOR_IMAGE:-navigator:local}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        VERSION: ${NAVIGATOR_BUILD_VERSION:-0.0.0-local}
+        SOURCE_REVISION: ${NAVIGATOR_SOURCE_REVISION:-unknown}
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "${NAVIGATOR_BIND_ADDRESS:-127.0.0.1}:${NAVIGATOR_HTTP_PORT:-8080}:8080"
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 30s

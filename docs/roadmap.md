@@ -1,8 +1,9 @@
 # Navigator roadmap
 
 - **Stage 0A: Backend foundation (complete)** - Repository governance and the ASP.NET Core foundation.
-- **Stage 0B: Frontend foundation (current)** - React browser shell, routing, and API health status.
-- **Stage 0C: Container and Compose foundation (next)** - Local container and Compose packaging.
+- **Stage 0B: Frontend foundation (complete)** - React browser shell, routing, and API health status.
+- **Stage 0C: Container and Compose foundation (complete)** - Production container and local Compose packaging.
+- **Stage 1A: Image and registry domain modeling (next)** - Define provider-neutral image and registry concepts.
 
 ## Later stages
 

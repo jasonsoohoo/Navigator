@@ -1,0 +1,32 @@
+name: Container CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NAVIGATOR_COMPOSE_PROJECT: navigator-container-ci
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show Docker versions
+        run: |
+          docker version
+          docker compose version
+
+      - name: Verify production container
+        run: sh ./scripts/verify-container.sh
+
+      - name: Clean up smoke-test resources
+        if: always()
+        run: docker compose --project-name "$NAVIGATOR_COMPOSE_PROJECT" -f deploy/compose.yaml down --remove-orphans || true
