@@ -28,4 +28,22 @@ public sealed class HealthEndpointsTests : IClassFixture<WebApplicationFactory<P
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
+
+    [Theory]
+    [InlineData("/api/does-not-exist")]
+    [InlineData("/health/does-not-exist")]
+    public async Task UnknownReservedEndpointReturnsNotFound(string path)
+    {
+        using var response = await _client.GetAsync(path);
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task FrontendIsNotServedInDevelopment()
+    {
+        using var response = await _client.GetAsync("/");
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
 }
