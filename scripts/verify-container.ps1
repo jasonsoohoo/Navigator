@@ -10,6 +10,7 @@ $smokeImage = if ($env:NAVIGATOR_SMOKE_IMAGE) { $env:NAVIGATOR_SMOKE_IMAGE } els
 $started = $false
 $cleanupRequired = $false
 $httpClient = [System.Net.Http.HttpClient]::new()
+$httpClient.Timeout = [TimeSpan]::FromSeconds(10)
 
 function Invoke-Docker {
     param([Parameter(Mandatory)][string[]] $Arguments)

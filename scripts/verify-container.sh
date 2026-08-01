@@ -76,7 +76,7 @@ check_request() {
     path=$1
     expected_status=$2
     expect_html=${3:-false}
-    result=$(curl --silent --show-error --output "$response_body" --write-out '%{http_code}|%{content_type}' "$base_url$path")
+    result=$(curl --silent --show-error --connect-timeout 5 --max-time 10 --output "$response_body" --write-out '%{http_code}|%{content_type}' "$base_url$path")
     status=${result%%|*}
     content_type=${result#*|}
     [ "$status" = "$expected_status" ] || {
